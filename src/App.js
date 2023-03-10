@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./assets/doodle-it-logo-modified.png";
+import hLogo from "./assets/doodle-it-logo.png";
+import Home from "./Home";
+import Game from "./Game";
+import CreateRoom from "./CreateRoom";
+import JoinRoom from "./JoinRoom";
+import Tutorial from "./Tutorial";
+import Model from "./Model";
+
+export const CanvasContext = React.createContext();
 
 function App() {
+  const [canvas, setCanvas] = useState(null);
+  const [result, setResult] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CanvasContext.Provider value={{ canvas, setCanvas }}>
+        <Model setResult={setResult} />
+        <Tutorial result={result} />
+        {/* <Game /> */}
+        {/* <CreateRoom /> */}
+        {/* <Home /> */}
+        {/* <JoinRoom /> */}
+      </CanvasContext.Provider>
+    </>
   );
 }
 
