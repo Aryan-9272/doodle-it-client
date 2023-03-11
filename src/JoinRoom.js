@@ -1,5 +1,4 @@
-import React from "react";
-import pIcon from "./assets/avatars/_Group_ (4).png";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretLeft,
@@ -8,8 +7,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "./Header";
 import Footer from "./Footer";
+import multiavatar from "@multiavatar/multiavatar/esm";
+
+let avatarArray = [];
+let index = 0;
+
+for (let i = 0; i < 15; i++) {
+  avatarArray[i] = (Math.random() * 10000).toFixed(0);
+}
 
 const JoinRoom = () => {
+  const [name, setName] = useState("");
+  const [seed, setSeed] = useState(avatarArray[index]);
+  let svgCode = multiavatar(seed);
+  const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
   return (
     <>
       <div
@@ -23,34 +34,46 @@ const JoinRoom = () => {
 
       <div
         className="w-[24rem] h-[27rem] bg-gray-900/50 shadow-lg rounded-md p-[1.2rem] opacity-95 order-2 mx-auto gap-5 relative top-[10rem] grid grid-rows-[17%_12%_17%_17%] border-white border-2
-        sm:w-[32rem] sm:top-[11.5rem]
+        sm:w-[33rem] sm:top-[11.5rem]
         md:w-[35rem] md:py-[1.2rem]
         lg:w-[40rem] lg:py-[1.3rem] lg:h-[28rem] lg:px-[2rem]"
       >
         <div className="row-span-2 flex justify-center items-center gap-1">
-          <FontAwesomeIcon
-            icon={faCaretLeft}
-            size="4x"
-            color="white"
-            opacity="0.9"
-          />
+          <span
+            className="hover:cursor-pointer hover:opacity-80"
+            onClick={() => {
+              if (index > 0) index--;
+              else index = 14;
+              setSeed(avatarArray[index]);
+            }}
+          >
+            <FontAwesomeIcon icon={faCaretLeft} size="4x" color="white" />
+          </span>
           <img
-            src={pIcon}
-            className=" h-full w-auto object-cover border-white border-solid border-[2px] rounded-[50%]"
+            src={imgSrc}
+            className=" h-[95%] w-auto object-cover border-white border-solid border-[2px] rounded-[50%]"
           />
-          <FontAwesomeIcon
-            icon={faCaretRight}
-            size="4x"
-            color="white"
-            opacity="0.9"
-          />
+          <span
+            className="hover:cursor-pointer hover:opacity-80"
+            onClick={() => {
+              if (index < 14) index++;
+              else index = 0;
+              setSeed(avatarArray[index]);
+            }}
+          >
+            <FontAwesomeIcon icon={faCaretRight} size="4x" color="white" />
+          </span>
         </div>
         <div className="flex justify-center">
           <input
             placeholder="ENTER NAME"
-            className=" w-full h-full text-[2rem] rounded-md p-2 text-gray-500
+            value={name}
+            className=" w-full h-[95%] text-[2rem] rounded-md p-2 text-gray-500 border-[2px] border-[black] outline outline-[2px] outline-[white]
             md:text-[2.2rem]
             lg:text-[2.4rem]"
+            onChange={(e)=>{
+              setName(e.target.value)
+            }}
           ></input>
         </div>
 

@@ -18,9 +18,9 @@ function App() {
       <CanvasContext.Provider value={{ canvas, setCanvas }}>
         <Model setResult={setResult} />
         {/* <Home /> */}
-        {/* <CreateRoom /> */}
+        <CreateRoom />
         {/* <JoinRoom /> */}
-        <Tutorial result={result} />
+        {/* <Tutorial result={result} /> */}
         {/* <Game /> */}
       </CanvasContext.Provider>
     </>
