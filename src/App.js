@@ -9,20 +9,24 @@ import Tutorial from "./Tutorial";
 import Model from "./Model";
 
 export const CanvasContext = React.createContext();
+export const PageContext = React.createContext();
 
 function App() {
+  const [page, setPage] = useState("home");
   const [canvas, setCanvas] = useState(null);
   const [result, setResult] = useState(null);
   return (
     <>
-      <CanvasContext.Provider value={{ canvas, setCanvas }}>
-        <Model setResult={setResult} />
-        {/* <Home /> */}
-        <CreateRoom />
-        {/* <JoinRoom /> */}
-        {/* <Tutorial result={result} /> */}
-        {/* <Game /> */}
-      </CanvasContext.Provider>
+      <PageContext.Provider value={{page,setPage}}>
+        <CanvasContext.Provider value={{ canvas, setCanvas }}>
+          <Model setResult={setResult} />
+          {page === "tutorial" ? <Tutorial result={result} /> : <></>}
+          {page === "game" ? <Game /> : <></>}
+        </CanvasContext.Provider>
+        {page === "create" ? <CreateRoom /> : <></>}
+        {page === "home" ? <Home /> : <></>}
+        {page === "join" ? <JoinRoom /> : <></>}
+      </PageContext.Provider>
     </>
   );
 }

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
+import { PageContext } from "./App";
 
 let avatarArray = [];
 let index = 0;
@@ -14,6 +15,7 @@ for (let i = 0; i < 15; i++) {
 }
 
 const CreateRoom = () => {
+  const pageState = useContext(PageContext);
   const [name, setName] = useState("");
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
@@ -71,7 +73,7 @@ const CreateRoom = () => {
             onChange={(e) => {
               setName(e.target.value);
             }}
-          ></input>
+          />
         </div>
         <div
           className=" w-full h-[75%] bg-white rounded-md flex justify-between items-center p-2 text-[1.5rem] text-black justify-self-center self-center
@@ -125,6 +127,9 @@ const CreateRoom = () => {
         <div
           className="w-[12rem] h-[86%] justify-self-center self-center bg-black rounded-md border-white border-2 text-white items-center flex justify-center gap-1
         hover:cursor-pointer hover:opacity-70 duration-300"
+          onClick={() => {
+            pageState.setPage("game");
+          }}
         >
           <span className="text-[1.5rem] pt-[3px]">CREATE...</span>
           <FontAwesomeIcon icon={faPen} fade size="lg" />

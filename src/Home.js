@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "./assets/doodle-it-logo-modified.png";
 import Header from "./Header";
 import Footer from "./Footer";
+import { PageContext } from "./App";
 
 function Home() {
+  const pageState = useContext(PageContext);
   return (
     <div
       className="w-full min-h-[80rem] h-screen bg-gradient-to-t from-slate-900 to-black absolute
@@ -12,7 +14,7 @@ function Home() {
     lg:min-h-[50rem]
     xl:min-h-[55rem]"
     >
-      <Header/>
+      <Header />
       <div
         className="flex flex-col justify-between items-center mt-[2rem] w-full h-auto gap-[3.5rem] absolute
       lg:flex-row lg:px-[1rem] lg:gap-0 lg:mt-[3rem]
@@ -42,18 +44,24 @@ function Home() {
           <div
             className=" w-[80%]  h-[5rem]  bg-black rounded-md text-white text-center text-[2.1rem] p-3 border-[2px] border-white
           transition duration-200 ease-in-out hover:cursor-pointer hover:scale-[1.05] hover:bg-white hover:text-black select-none"
+            onClick={() => {
+              pageState.setPage("create");
+            }}
           >
             CREATE A ROOM
           </div>
           <div
             className=" w-[80%]  h-[5rem]  bg-black rounded-md text-white text-center text-[2.1rem] p-3 border-[2px] border-white
           transition duration-200 ease-in-out hover:cursor-pointer hover:scale-[1.05] hover:bg-white hover:text-black select-none"
+            onClick={() => {
+              pageState.setPage("join");
+            }}
           >
             JOIN A ROOM
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

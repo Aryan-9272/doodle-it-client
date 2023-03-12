@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretLeft,
@@ -8,6 +8,7 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
+import { PageContext } from "./App";
 
 let avatarArray = [];
 let index = 0;
@@ -17,6 +18,7 @@ for (let i = 0; i < 15; i++) {
 }
 
 const JoinRoom = () => {
+  const pageState = useContext(PageContext);
   const [name, setName] = useState("");
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
@@ -71,10 +73,10 @@ const JoinRoom = () => {
             className=" w-full h-[95%] text-[2rem] rounded-md p-2 text-gray-500 border-[2px] border-[black] outline outline-[2px] outline-[white]
             md:text-[2.2rem]
             lg:text-[2.4rem]"
-            onChange={(e)=>{
-              setName(e.target.value)
+            onChange={(e) => {
+              setName(e.target.value);
             }}
-          ></input>
+          />
         </div>
 
         <div className="flex justify-between items-center rounded-md p-2 bg-white gap-3">
@@ -95,6 +97,9 @@ const JoinRoom = () => {
         <div
           className="w-[10rem] h-[86%] justify-self-center self-center bg-black rounded-md border-white border-2 text-white items-center flex justify-center gap-1
         hover:cursor-pointer hover:opacity-70 duration-300"
+          onClick={() => {
+            pageState.setPage("game");
+          }}
         >
           <span className="text-[1.7rem] pt-[3px]">JOIN...</span>
           <FontAwesomeIcon icon={faRightFromBracket} fade size="xl" />

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import hLogo from "./assets/doodle-it-logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { PageContext } from "./App";
 
 const Header = () => {
+  const pageState = useContext(PageContext);
   return (
     <div className=" top-0 w-full h-[5rem] text-white flex  items-center text-[1.5rem] relative">
       <span
@@ -38,18 +40,42 @@ const Header = () => {
         <li
           className=" border-white border-[1px] rounded-sm px-2 hover:text-black
       transition duration-300 ease-in-out hover:bg-white hover:cursor-pointer select-none"
+          style={
+            pageState.page == "home"
+              ? { backgroundColor: "white", color: "black" }
+              : {}
+          }
+          onClick={() => {
+            pageState.setPage("home");
+          }}
         >
           HOME
         </li>
         <li
           className=" border-white border-[1px] rounded-sm px-2 hover:text-black
       transition duration-300 ease-in-out hover:bg-white hover:cursor-pointer select-none"
+          style={
+            pageState.page == "tutorial"
+              ? { backgroundColor: "white", color: "black" }
+              : {}
+          }
+          onClick={() => {
+            pageState.setPage("tutorial");
+          }}
         >
           HOW TO PLAY
         </li>
         <li
           className=" border-white border-[1px] rounded-sm px-2 hover:text-black
       transition duration-300 ease-in-out hover:bg-white hover:cursor-pointer select-none"
+          style={
+            pageState.page == "about"
+              ? { backgroundColor: "white", color: "black" }
+              : {}
+          }
+          onClick={() => {
+            pageState.setPage("about");
+          }}
         >
           ABOUT
         </li>
