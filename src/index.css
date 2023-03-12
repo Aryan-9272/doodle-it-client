@@ -19,6 +19,14 @@ body {
   background: rgba(0, 0, 0, 0.6);
 }
 
+.players::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+.players::-webkit-scrollbar-thumb {
+  background-color: white;
+}
+
 .chat::-webkit-scrollbar-thumb {
   background-color: black;
   border-radius: 0;

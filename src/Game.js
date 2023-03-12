@@ -9,6 +9,8 @@ import hLogo from "./assets/doodle-it-logo.png";
 import Result from "./Result";
 import Scoreboard from "./Scoreboard";
 import Board from "./Board";
+import Players from "./Players";
+import Chats from "./Chats";
 
 const decideWidth = () => {
   let width;
@@ -117,6 +119,23 @@ const Game = () => {
             >
               PLAYERS
             </h1>
+            <div
+              className="w-full h-[420px] pl-1 pb-1 overflow-y-scroll players
+            sm:pl-1 sm:pb-1 sm:h-[520px]
+            md:pl-2 md:pb-2 md:h-[600px]
+            lg:pl-1 lg:pb-1 lg:h-[470px]
+            xl:pl-2 xl:pb-2 xl:h-[570px]"
+            >
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+              <Players />
+            </div>
           </div>
 
           <Board />
@@ -146,16 +165,8 @@ const Game = () => {
               CHATBOX
             </h1>
             <div className="chat w-full h-[83%] bg-white border-black border-[1px] overflow-y-scroll">
-              <div className="flex justify-start gap-3 items-center p-3">
-                <FontAwesomeIcon icon={faMessage} size={"xl"} />
-                <p
-                  className="text-xl p-2 border-[1px] border-white w-full bg-[gold] text-white rounded-md
-                lg:p-1 lg:text-lg
-                xl:p-2 xl:text-xl"
-                >
-                  Namor has joined the game.
-                </p>
-              </div>
+              <Chats />
+              <Chats />
             </div>
             <input
               className="w-full h-[7%] text-[1rem] bg-gray-900 focus:outline-none text-white p-3 border-t-[1px]"
