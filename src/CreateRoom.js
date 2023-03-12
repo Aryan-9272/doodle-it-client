@@ -6,6 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { PageContext } from "./App";
+import { SocketContext } from "./socketContext";
 
 let avatarArray = [];
 let index = 0;
@@ -14,9 +15,17 @@ for (let i = 0; i < 15; i++) {
   avatarArray[i] = (Math.random() * 10000).toFixed(0);
 }
 
+const maxPlayerOptions = [5, 10, 15];
+const roundOptions = [3, 5, 7, 10];
+const timeOptions = [10, 20, 30];
+
 const CreateRoom = () => {
   const pageState = useContext(PageContext);
+  const socket = useContext(SocketContext);
   const [name, setName] = useState("");
+  const [maxP, setMaxP] = useState(maxPlayerOptions[0]);
+  const [rounds, setRounds] = useState(roundOptions[0]);
+  const [time, setTime] = useState(timeOptions[0]);
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
   const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
@@ -67,11 +76,12 @@ const CreateRoom = () => {
         <div className="flex justify-center">
           <input
             placeholder="ENTER NAME"
+            value={name}
             className=" w-full h-[90%] text-[2rem] rounded-md p-2 text-gray-500 border-[2px] border-[black] outline outline-[white] outline-[2px]
             md:text-[2.2rem]
             lg:text-[2.4rem]"
             onChange={(e) => {
-              setName(e.target.value);
+              if (e.target.value.length <= 15) setName(e.target.value);
             }}
           />
         </div>
@@ -83,12 +93,20 @@ const CreateRoom = () => {
         >
           SET MAX PLAYERS :
           <select
+            value={maxP}
+            onChange={(e) => {
+              setMaxP(e.target.value);
+            }}
             className="w-[4rem] border-black border-2 rounded-md
       sm:w-[5.5rem]"
           >
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
+            {maxPlayerOptions.map((option) => {
+              return (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div
@@ -99,13 +117,20 @@ const CreateRoom = () => {
         >
           SET ROUNDS :
           <select
+            value={rounds}
+            onChange={(e) => {
+              setRounds(e.target.value);
+            }}
             className="w-[4rem] border-black border-2 rounded-md
       sm:w-[5.5rem]"
           >
-            <option>3</option>
-            <option>5</option>
-            <option>7</option>
-            <option>10</option>
+            {roundOptions.map((option) => {
+              return (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div
@@ -116,19 +141,39 @@ const CreateRoom = () => {
         >
           SET TIME LIMIT :
           <select
+            value={time}
+            onChange={(e) => {
+              setTime(e.target.value);
+            }}
             className="w-[4rem] border-black border-2 rounded-md
       sm:w-[5.5rem]"
           >
-            <option>10s</option>
-            <option>20s</option>
-            <option>30s</option>
+            {timeOptions.map((option) => {
+              return (
+                <option key={option} value={option}>
+                  {option}s
+                </option>
+              );
+            })}
           </select>
         </div>
         <div
           className="w-[12rem] h-[86%] justify-self-center self-center bg-black rounded-md border-white border-2 text-white items-center flex justify-center gap-1
         hover:cursor-pointer hover:opacity-70 duration-300"
           onClick={() => {
-            pageState.setPage("game");
+            if (name.trim().length === 0) {
+              alert("Please Enter Your Name");
+              setName("");
+            } else {
+              socket.emit("create-room", {
+                Avatar: imgSrc,
+                name: name.trim(),
+                maxPlayers: maxP,
+                rounds: rounds,
+                timeLimit: time,
+              });
+              pageState.setPage("game");
+            }
           }}
         >
           <span className="text-[1.5rem] pt-[3px]">CREATE...</span>
