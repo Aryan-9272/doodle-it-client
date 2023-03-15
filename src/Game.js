@@ -11,6 +11,7 @@ import Scoreboard from "./Scoreboard";
 import Board from "./Board";
 import Players from "./Players";
 import Chats from "./Chats";
+import Lobby from "./Lobby";
 
 const decideWidth = () => {
   let width;
@@ -94,9 +95,10 @@ const Game = () => {
           </div>
         </div>
         <div
-          className="absolute mt-[6rem] flex justify-center items-center w-full px-6 overflow-hidden
-        sm:mt-4
-        lg:px-5 lg:justify-between
+          className="absolute mt-[6rem] flex justify-center items-center w-full h-[470px] px-6 overflow-hidden
+        sm:mt-4 sm:h-[570px]
+        md:h-[650px]
+        lg:px-5 lg:justify-between lg:h-fit
         xl:px-6"
         >
           <div
@@ -138,7 +140,8 @@ const Game = () => {
             </div>
           </div>
 
-          <Board />
+          <Lobby />
+          {/* <Board /> */}
 
           {/* <Result /> */}
 

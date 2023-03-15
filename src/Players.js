@@ -9,7 +9,7 @@ const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
 const Players = (props) => {
   return (
     <div
-      className="w-[189px] h-[3rem] text-[0.7rem] mt-1 bg-[#00000076] border-[2px] border-[#4e0eff] rounded-sm grid grid-rows-2 grid-cols-[20%_50%_30%] p-1 gap-x-1
+      className="w-[189px] h-[3rem] text-[0.7rem] mt-1 bg-[#00000076] border-[2px] border-[#4e0eff] rounded-sm grid grid-rows-2 grid-cols-[20%_49%_31%] p-1 gap-x-1
     md:w-[230px] md:h-[3.5rem] md:text-[0.85rem] md:mt-2
     lg:w-[189px] lg:text-[0.7rem] lg:h-[3rem] lg:mt-1
     xl:w-[260px] xl:h-[4rem] xl:text-[1rem] xl:gap-x-1 xl:mt-2"
