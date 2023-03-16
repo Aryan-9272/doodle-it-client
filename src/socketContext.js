@@ -1,10 +1,8 @@
-import React,{createContext} from "react";
+import React, { createContext } from "react";
 import io from "socket.io-client";
 
-const socket=io.connect("http://localhost:5000");
+export const socket = io.connect("http://localhost:5000");
 
-export const SocketContext=createContext(socket);
+const SocketContext = createContext(socket);
 
-export const SocketProvider=(children)=>{
-    return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
-}
+export default SocketContext;

@@ -6,7 +6,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { PageContext } from "./App";
-import { SocketContext } from "./socketContext";
+import SocketContext, { socket } from "./SocketContext";
+import { customAlphabet } from "nanoid";
+
+const nanoid = customAlphabet("1234567890", 6);
 
 let avatarArray = [];
 let index = 0;
@@ -166,7 +169,8 @@ const CreateRoom = () => {
               setName("");
             } else {
               socket.emit("create-room", {
-                Avatar: imgSrc,
+                roomCode: nanoid(),
+                avatar: imgSrc,
                 name: name.trim(),
                 maxPlayers: maxP,
                 rounds: rounds,

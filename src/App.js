@@ -7,7 +7,7 @@ import CreateRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
 import Tutorial from "./Tutorial";
 import Model from "./Model";
-import { SocketProvider } from "./socketContext";
+import SocketContext, { socket } from "./SocketContext";
 
 export const CanvasContext = React.createContext();
 export const PageContext = React.createContext();
@@ -18,15 +18,19 @@ function App() {
   const [result, setResult] = useState(null);
   return (
     <>
-      <PageContext.Provider value={{page,setPage}}>
+      <PageContext.Provider value={{ page, setPage }}>
         <CanvasContext.Provider value={{ canvas, setCanvas }}>
           <Model setResult={setResult} />
           {page === "tutorial" ? <Tutorial result={result} /> : <></>}
-          {page === "game" ? <Game /> : <></>}
+          <SocketContext.Provider value={socket}>
+            {page === "game" ? <Game /> : <></>}
+          </SocketContext.Provider>
         </CanvasContext.Provider>
-        {SocketProvider(page === "create" ? <CreateRoom /> : <></>)}
+        <SocketContext.Provider value={socket}>
+          {page === "create" ? <CreateRoom /> : <></>}
+          {page === "join" ? <JoinRoom /> : <></>}
+        </SocketContext.Provider>
         {page === "home" ? <Home /> : <></>}
-        {page === "join" ? <JoinRoom /> : <></>}
       </PageContext.Provider>
     </>
   );

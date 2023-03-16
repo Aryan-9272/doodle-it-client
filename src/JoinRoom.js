@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { PageContext } from "./App";
+import SocketContext, { socket } from "./SocketContext";
 
 let avatarArray = [];
 let index = 0;
@@ -20,6 +21,7 @@ for (let i = 0; i < 15; i++) {
 const JoinRoom = () => {
   const pageState = useContext(PageContext);
   const [name, setName] = useState("");
+  const [roomCode, setRoomCode] = useState("");
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
   const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
@@ -74,7 +76,7 @@ const JoinRoom = () => {
             md:text-[2.2rem]
             lg:text-[2.4rem]"
             onChange={(e) => {
-              setName(e.target.value);
+              if (e.target.value.length <= 15) setName(e.target.value);
             }}
           />
         </div>
@@ -88,9 +90,13 @@ const JoinRoom = () => {
             ROOM CODE :
           </label>
           <input
+            value={roomCode}
             className="rounded-md text-[1.5rem] w-[40%] px-3 border-[2px] border-black flex-grow text-center text-black/70
           md:text-[1.6rem]
           lg:text-[1.9rem]"
+            onChange={(e) => {
+              if (e.target.value.length <= 6) setRoomCode(e.target.value);
+            }}
           ></input>
         </div>
 
@@ -98,7 +104,20 @@ const JoinRoom = () => {
           className="w-[10rem] h-[86%] justify-self-center self-center bg-black rounded-md border-white border-2 text-white items-center flex justify-center gap-1
         hover:cursor-pointer hover:opacity-70 duration-300"
           onClick={() => {
-            pageState.setPage("game");
+            if (name.trim().length === 0) {
+              alert("Please Enter Your Name");
+              setName("");
+            } else if (roomCode.trim().length == 0) {
+              alert("Please Enter Room Code");
+              setRoomCode("");
+            } else {
+              socket.emit("join-room", {
+                roomCode: roomCode,
+                avatar: imgSrc,
+                name: name.trim(),
+              });
+              pageState.setPage("game");
+            }
           }}
         >
           <span className="text-[1.7rem] pt-[3px]">JOIN...</span>
