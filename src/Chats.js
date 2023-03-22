@@ -1,25 +1,26 @@
 import React from "react";
-import multiavatar from "@multiavatar/multiavatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 
-const seed = 12299;
-
-let svgCode = multiavatar(seed);
-const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
-
-const Chats = () => {
+const Chats = (props) => {
   return (
     <div className="flex justify-start gap-2 items-center p-3">
-      <div className="w-[2.7rem] text-[1.8rem] flex justify-center items-center">
-        {seed===12299?<img src={imgSrc} className="w-full rounded-full"/>:<FontAwesomeIcon icon={faMessage}/>}
+      <div className="w-[12%] text-[1.8rem] flex justify-center items-center">
+        {props.chat.senderID != "SYSTEM_MSG" ? (
+          <img src={props.chat.avatar} className="w-full rounded-full" />
+        ) : (
+          <FontAwesomeIcon icon={faMessage} />
+        )}
       </div>
       <p
-        className="text-xl p-2 border-[1px] border-white w-full bg-[violet] text-white rounded-md break-words
-    lg:p-1 lg:text-lg
+        className="text-xl p-2 border-[1px] border-white w-[85%] opacity-[0.8] text-white rounded-md break-words
+    lg:p-2 lg:text-lg
     xl:p-2 xl:text-xl"
+        style={{ backgroundColor: props.chat.color }}
       >
-        Namor : Hey guys wassup.
+        {props.chat.senderID != "SYSTEM_MSG"
+          ? `${props.chat.name} : ${props.chat.chatMsg}`
+          : props.chat.chatMsg}
       </p>
     </div>
   );

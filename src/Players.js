@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import multiavatar from "@multiavatar/multiavatar";
 
-const seed = 111232;
-
-let svgCode = multiavatar(seed);
-const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
+// let svgCode = multiavatar(seed);
+// const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
 
 const Players = (props) => {
+  const [playerDetails, setPlayerDetails] = useState(props.details);
+  let role;
+  if (playerDetails.isAdmin == true && playerDetails.playerid === props.id) {
+    role = "YOU/AD";
+  } else if (playerDetails.playerid === props.id) {
+    role = "YOU";
+  } else if (playerDetails.isAdmin == true) {
+    role = "ADMIN";
+  } else {
+    role = "PLAYER";
+  }
+  
   return (
     <div
       className="w-[189px] h-[3rem] text-[0.7rem] mt-1 bg-[#00000076] border-[2px] border-[#4e0eff] rounded-sm grid grid-rows-2 grid-cols-[20%_49%_31%] p-1 gap-x-1
@@ -16,18 +26,18 @@ const Players = (props) => {
     >
       <div className="row-span-2 flex justify-center items-center">
         <img
-          src={imgSrc}
+          src={playerDetails.avatar}
           className="h-[85%] rounded-full border-[2px] border-white"
         />
       </div>
       <div className="row-span-1  flex justify-start items-center col-span-2 text-white px-1">
-        NAME : Aryan Raj
+        NAME : {playerDetails.name}
       </div>
       <div className="row-span-1 flex justify-start items-center text-white px-1">
-        SCORE : 1000
+        SCORE : {playerDetails.score}
       </div>
-      <div className="row-span-1 flex justify-start items-center text-white">
-        (PLAYER)
+      <div className="row-span-1 flex justify-end items-center text-white px-[10px]">
+        ({role})
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { PageContext } from "./App";
-import SocketContext, { socket } from "./SocketContext";
+import SocketContext from "./SocketContext";
 
 let avatarArray = [];
 let index = 0;
@@ -20,6 +20,7 @@ for (let i = 0; i < 15; i++) {
 
 const JoinRoom = () => {
   const pageState = useContext(PageContext);
+  const socket = useContext(SocketContext);
   const [name, setName] = useState("");
   const [roomCode, setRoomCode] = useState("");
   const [seed, setSeed] = useState(avatarArray[index]);

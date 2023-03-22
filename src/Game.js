@@ -1,9 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  createContext,
+} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHourglassHalf,
   faMessage,
   faPenToSquare,
+  faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import hLogo from "./assets/doodle-it-logo.png";
 import Result from "./Result";
@@ -12,6 +19,7 @@ import Board from "./Board";
 import Players from "./Players";
 import Chats from "./Chats";
 import Lobby from "./Lobby";
+import SocketContext from "./SocketContext";
 
 const decideWidth = () => {
   let width;
@@ -30,6 +38,11 @@ const decideWidth = () => {
 };
 
 const Game = () => {
+  const socket = useContext(SocketContext);
+  const [playerList, setPlayerList] = useState([]);
+  const [chatList, setChatList] = useState([]);
+  const [chatMsg, setChatMsg] = useState("");
+  const [roomDetails, setRoomDetails] = useState({});
   const [opacity, setOpacity] = useState(0);
   const [z, setZ] = useState(4);
   const [playerSlide, setPlayerSlide] = useState(-120);
@@ -49,8 +62,45 @@ const Game = () => {
     }
   };
 
+  const playerUpdate = (players) => {
+    setPlayerList(
+      players.map((player, index) => {
+        return <Players key={index} details={player} id={socket.id} />;
+      })
+    );
+  };
+
+  const chatUpdate = (chat) => {
+    setChatList((prev) => {
+      return [...prev, <Chats key={prev.length} chat={chat} />];
+    });
+  };
+
+  const sendMessage = () => {
+    if (chatMsg.trim().length != 0) {
+      socket.emit("chat-to-server", {
+        roomCode: roomDetails.code,
+        chatMsg: chatMsg,
+      });
+      setChatMsg("");
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("resize", resized);
+    socket.on("player-joined", (room) => {
+      playerUpdate(room.players);
+      setRoomDetails({
+        code: room.roomCode,
+        rounds: room.rounds,
+        currRound: room.currRound,
+        timeLimit: room.timeLimit,
+      });
+    });
+
+    socket.on("chat-to-client", (chat) => {
+      chatUpdate(chat);
+    });
 
     return () => {
       window.removeEventListener("resize", resized);
@@ -128,19 +178,11 @@ const Game = () => {
             lg:pl-1 lg:pb-1 lg:h-[470px]
             xl:pl-2 xl:pb-2 xl:h-[570px]"
             >
-              <Players />
-              <Players />
-              <Players />
-              <Players />
-              <Players />
-              <Players />
-              <Players />
-              <Players />
-              <Players />
+              {playerList}
             </div>
           </div>
 
-          <Lobby />
+          <Lobby details={roomDetails} />
           {/* <Board /> */}
 
           {/* <Result /> */}
@@ -168,13 +210,28 @@ const Game = () => {
               CHATBOX
             </h1>
             <div className="chat w-full h-[83%] bg-white border-black border-[1px] overflow-y-scroll">
-              <Chats />
-              <Chats />
+              {chatList}
             </div>
-            <input
-              className="w-full h-[7%] text-[1rem] bg-gray-900 focus:outline-none text-white p-3 border-t-[1px]"
-              placeholder="ENTER TEXT HERE"
-            ></input>
+
+            <div className="w-full h-[7%] bg-gray-900 flex justify-between items-center border-t-[1px] text-white pr-3">
+              <input
+                className="w-[95%] h-full text-[1rem] bg-gray-900 focus:outline-none text-white p-3"
+                placeholder="ENTER TEXT HERE"
+                value={chatMsg}
+                onChange={(e) => {
+                  setChatMsg(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") sendMessage();
+                }}
+              ></input>
+              <span
+                className="text-[1.1rem] transition-opacity duration-150 hover:opacity-80 hover:cursor-pointer"
+                onClick={sendMessage}
+              >
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </span>
+            </div>
           </div>
         </div>
 

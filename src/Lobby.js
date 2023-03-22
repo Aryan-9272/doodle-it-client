@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lobby = () => {
+const Lobby = (props) => {
   return (
     <div
       className="border-white border-[1px] min-w-[370px] h-[320px] relative bg-gray-900/50 z-[5] flex justify-between items-center flex-col
@@ -16,7 +16,7 @@ const Lobby = () => {
       lg:text-[2.2rem]
       xl:text-[2.5rem]"
       >
-        ROOM CODE : 123456
+        ROOM CODE : {props.details.code}
       </h1>
       <div
         className="w-full h-[65%] bg-[#00000076] flex justify-between items-center flex-col py-2
@@ -29,7 +29,7 @@ const Lobby = () => {
         lg:text-[1.9rem]
         xl:text-[2rem]"
         >
-          ROUND 1 OF 15
+          ROUND {props.details.currRound} OF {props.details.rounds}
           <h1
             className="text-[1.2rem]
           sm:text-[1.35rem]

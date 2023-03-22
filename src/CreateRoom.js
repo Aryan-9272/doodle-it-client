@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { PageContext } from "./App";
-import SocketContext, { socket } from "./SocketContext";
+import SocketContext from "./SocketContext";
 import { customAlphabet } from "nanoid";
 
 const nanoid = customAlphabet("1234567890", 6);
