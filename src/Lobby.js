@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import SocketContext from "./SocketContext";
 
 const Lobby = (props) => {
+  const socket = useContext(SocketContext);
+  const [playerReady, setPlayerReady] = useState(false);
   return (
     <div
       className="border-white border-[1px] min-w-[370px] h-[320px] relative bg-gray-900/50 z-[5] flex justify-between items-center flex-col
@@ -61,10 +66,15 @@ const Lobby = (props) => {
         </div>
       </div>
       <div
-        className="bg-white w-full h-[15%] border-white border-[1px] text-[2rem] flex justify-center items-center
+        className="bg-white w-full h-[15%] border-white border-[1px] text-[2rem] flex justify-center items-center gap-2
       hover:cursor-pointer hover:opacity-70 transition-opacity duration-300"
+        onClick={() => {
+          setPlayerReady(true);
+          socket.emit("player-ready", { roomCode: props.details.code });
+        }}
       >
         READY
+        {playerReady == true ? <FontAwesomeIcon icon={faCircleCheck} /> : <></>}
       </div>
     </div>
   );

@@ -49,6 +49,8 @@ const Game = () => {
   const [chatSlide, setChatSlide] = useState(120);
   const [winWidth, setWinWidth] = useState(decideWidth());
   const currWidth = useRef(decideWidth());
+  const playerRef = useRef(null);
+  const chatRef = useRef(null);
 
   const resized = () => {
     let width = decideWidth();
@@ -88,7 +90,7 @@ const Game = () => {
 
   useEffect(() => {
     window.addEventListener("resize", resized);
-    socket.on("player-joined", (room) => {
+    socket.on("player-list-update", (room) => {
       playerUpdate(room.players);
       setRoomDetails({
         code: room.roomCode,
@@ -106,6 +108,20 @@ const Game = () => {
       window.removeEventListener("resize", resized);
     };
   }, []);
+
+  useEffect(() => {
+    playerRef.current.scrollTo({
+      top: playerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [playerList]);
+
+  useEffect(() => {
+    chatRef.current.scrollTo({
+      top: chatRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [chatList]);
 
   return (
     <>
@@ -177,6 +193,7 @@ const Game = () => {
             md:pl-2 md:pb-2 md:h-[600px]
             lg:pl-1 lg:pb-1 lg:h-[470px]
             xl:pl-2 xl:pb-2 xl:h-[570px]"
+              ref={playerRef}
             >
               {playerList}
             </div>
@@ -209,7 +226,10 @@ const Game = () => {
             >
               CHATBOX
             </h1>
-            <div className="chat w-full h-[83%] bg-white border-black border-[1px] overflow-y-scroll">
+            <div
+              className="chat w-full h-[83%] bg-white border-black border-[1px] overflow-y-scroll"
+              ref={chatRef}
+            >
               {chatList}
             </div>
 
