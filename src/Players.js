@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import multiavatar from "@multiavatar/multiavatar";
-
 
 const Players = (props) => {
   const [playerDetails, setPlayerDetails] = useState(props.details);

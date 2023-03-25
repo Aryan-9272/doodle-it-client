@@ -81,7 +81,7 @@ const Game = () => {
   const sendMessage = () => {
     if (chatMsg.trim().length != 0) {
       socket.emit("chat-to-server", {
-        roomCode: roomDetails.code,
+        roomCode: roomDetails.roomCode,
         chatMsg: chatMsg,
       });
       setChatMsg("");
@@ -90,14 +90,13 @@ const Game = () => {
 
   useEffect(() => {
     window.addEventListener("resize", resized);
-    socket.on("player-list-update", (room) => {
-      playerUpdate(room.players);
-      setRoomDetails({
-        code: room.roomCode,
-        rounds: room.rounds,
-        currRound: room.currRound,
-        timeLimit: room.timeLimit,
-      });
+
+    socket.on("player-joined", (details) => {
+      setRoomDetails(details);
+    });
+
+    socket.on("player-list-update", (players) => {
+      playerUpdate(players);
     });
 
     socket.on("chat-to-client", (chat) => {

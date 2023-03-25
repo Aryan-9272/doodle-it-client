@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import SocketContext from "./SocketContext";
@@ -6,6 +6,17 @@ import SocketContext from "./SocketContext";
 const Lobby = (props) => {
   const socket = useContext(SocketContext);
   const [playerReady, setPlayerReady] = useState(false);
+  const [roundTimer, setRoundTimer] = useState(null);
+
+  if (props.details.startTime != undefined && roundTimer == null)
+    setRoundTimer(props.details.startTime);
+
+  useEffect(() => {
+    socket.on("round-timer-update", (startTime) => {
+      setRoundTimer(startTime);
+    });
+  }, []);
+
   return (
     <div
       className="border-white border-[1px] min-w-[370px] h-[320px] relative bg-gray-900/50 z-[5] flex justify-between items-center flex-col
@@ -21,7 +32,7 @@ const Lobby = (props) => {
       lg:text-[2.2rem]
       xl:text-[2.5rem]"
       >
-        ROOM CODE : {props.details.code}
+        ROOM CODE : {props.details.roomCode}
       </h1>
       <div
         className="w-full h-[65%] bg-[#00000076] flex justify-between items-center flex-col py-2
@@ -42,7 +53,11 @@ const Lobby = (props) => {
           lg:text-[1.1rem]
           xl:text-[1.2rem]"
           >
-            (STARTING AUTOMATICALLY IN 10s)
+            (STARTING AUTOMATICALLY IN{" "}
+            {Math.floor(roundTimer / 60) != 0
+              ? Math.floor(roundTimer / 60) + "m "
+              : ""}
+            {(roundTimer % 60) + "s"})
           </h1>
         </div>
         <div className="text-white w-full text-[2rem] flex justify-center items-center text-center flex-col"></div>
@@ -70,7 +85,7 @@ const Lobby = (props) => {
       hover:cursor-pointer hover:opacity-70 transition-opacity duration-300"
         onClick={() => {
           setPlayerReady(true);
-          socket.emit("player-ready", { roomCode: props.details.code });
+          socket.emit("player-ready", { roomCode: props.details.roomCode });
         }}
       >
         READY
