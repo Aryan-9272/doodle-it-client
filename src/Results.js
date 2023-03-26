@@ -1,7 +1,7 @@
 import React from "react";
 import pIcon from "./assets/avatars/_Group_ (1).png";
 
-const Scoreboard = () => {
+const Results = () => {
   return (
     <>
       <div
@@ -248,4 +248,4 @@ const Scoreboard = () => {
   );
 };
 
-export default Scoreboard;
+export default Results;

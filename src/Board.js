@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Canvas from "./Canvas";
 import {
@@ -7,9 +7,40 @@ import {
   faRotateLeft,
   faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
+import { CanvasContext } from "./App";
+import SocketContext from "./SocketContext";
 
-const Board = () => {
+const Board = (props) => {
+  const contextVal = useContext(CanvasContext);
+  const socket = useContext(SocketContext);
   const [tool, setTool] = useState("pen");
+  const [drawResult, setDrawResult] = useState(null);
+  const img = useRef();
+
+  useEffect(() => {
+    socket.on("end-round", () => {
+      setTool("submit");
+    });
+    if (drawResult != null) {
+      socket.emit("send-drawing", {
+        roomCode: props.roomCode,
+        word: props.word,
+        img: img.current,
+        confidence: drawResult,
+        closestMatch: contextVal.result[0],
+      });
+    }
+  }, [drawResult]);
+
+  useEffect(() => {
+    if (contextVal.result != null) {
+      const confidence = contextVal.result.find((element) => {
+        return element.label.replaceAll("_", " ") === props.word;
+      }).confidence;
+      setDrawResult(confidence);
+    }
+  }, [contextVal.result]);
+
   return (
     <div
       className="border-white border-[1px] w-[372px] h-[470px] relative flex justify-center flex-col items-center bg-gray-900/50 z-[5]
@@ -18,11 +49,16 @@ md:w-[552px] md:h-[650px]
 lg:w-[422px] lg:h-[520px] lg:ml-2
 xl:w-[522px] xl:h-[620px] xl:ml-3"
     >
-      <div className=" text-white text-[1.5rem] p-[0.2rem] h-[45px]">
-        THE GREAT WALL OF CHINA
+      <div className=" text-white text-[1.6rem] h-[45px] w-full flex justify-center items-center">
+        {props.word.toUpperCase()}
       </div>
       <div className="w-fit border-white border-t-[1px] border-b-[1px] touch-none">
-        <Canvas tool={tool} />
+        <Canvas
+          tool={tool}
+          imgRef={img}
+          drawable={props.drawableRef}
+          mode={"board"}
+        />
       </div>
       <div
         className="h-[45px] w-full flex justify-between items-center pt-1 gap-[2px] px-1

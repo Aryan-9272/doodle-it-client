@@ -1,20 +1,13 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  createContext,
-} from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHourglassHalf,
-  faMessage,
   faPenToSquare,
   faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import hLogo from "./assets/doodle-it-logo.png";
-import Result from "./Result";
-import Scoreboard from "./Scoreboard";
+import Report from "./Report";
+import Results from "./Results";
 import Board from "./Board";
 import Players from "./Players";
 import Chats from "./Chats";
@@ -39,15 +32,24 @@ const decideWidth = () => {
 
 const Game = () => {
   const socket = useContext(SocketContext);
+
+  const [gameComponent, setGameComponent] = useState("Lobby");
+  const [gameTimer, setGameTimer] = useState();
   const [playerList, setPlayerList] = useState([]);
   const [chatList, setChatList] = useState([]);
   const [chatMsg, setChatMsg] = useState("");
   const [roomDetails, setRoomDetails] = useState({});
+  const [word, setWord] = useState("");
+  const [results, setResults] = useState([]);
+  const [report, setReport] = useState({});
+
   const [opacity, setOpacity] = useState(0);
   const [z, setZ] = useState(4);
   const [playerSlide, setPlayerSlide] = useState(-120);
   const [chatSlide, setChatSlide] = useState(120);
   const [winWidth, setWinWidth] = useState(decideWidth());
+
+  const drawable = useRef(true);
   const currWidth = useRef(decideWidth());
   const playerRef = useRef(null);
   const chatRef = useRef(null);
@@ -93,6 +95,7 @@ const Game = () => {
 
     socket.on("player-joined", (details) => {
       setRoomDetails(details);
+      setGameTimer(details.timeLimit);
     });
 
     socket.on("player-list-update", (players) => {
@@ -101,6 +104,26 @@ const Game = () => {
 
     socket.on("chat-to-client", (chat) => {
       chatUpdate(chat);
+    });
+
+    socket.on("start-round", ({ word, players }) => {
+      playerUpdate(players);
+      setWord(word);
+      setGameComponent("Board");
+    });
+
+    socket.on("game-timer-update", (gameTime) => {
+      setGameTimer(gameTime);
+    });
+
+    socket.on("show-results", (results) => {
+      setResults(results);
+      setReport(() => {
+        return results.find((result) => {
+          return result.playerid === socket.id;
+        });
+      });
+      setGameComponent("Report");
     });
 
     return () => {
@@ -156,7 +179,9 @@ const Game = () => {
           xl:right-[4rem]"
           >
             <FontAwesomeIcon icon={faHourglassHalf} size="sm" shake={false} />
-            <h1 className="ml-3 ">TIME LEFT : 30s</h1>
+            <h1 className="ml-3">
+              TIME {gameComponent === "Lobby" ? "LIMIT" : "LEFT"} : {gameTimer}s
+            </h1>
           </div>
         </div>
         <div
@@ -198,12 +223,21 @@ const Game = () => {
             </div>
           </div>
 
-          <Lobby details={roomDetails} />
-          {/* <Board /> */}
+          {gameComponent === "Lobby" ? <Lobby details={roomDetails} /> : <></>}
 
-          {/* <Result /> */}
+          {gameComponent === "Board" ? (
+            <Board
+              drawableRef={drawable}
+              word={word}
+              roomCode={roomDetails.roomCode}
+            />
+          ) : (
+            <></>
+          )}
 
-          {/* <Scoreboard/> */}
+          {gameComponent === "Report" ? <Report result={report}/> : <></>}
+
+          {gameComponent === "Results" ? <Results /> : <></>}
 
           <div
             className="w-[330px] h-[470px] justify-center items-center flex-col border-white border-[1px] self-end absolute right-2 z-10
@@ -270,6 +304,7 @@ const Game = () => {
               setPlayerSlide(-120);
               setChatSlide(120);
               setZ(4);
+              drawable.current = true;
             }}
           >
             BACK
@@ -291,6 +326,7 @@ const Game = () => {
               setZ(6);
               setOpacity(1);
               setPlayerSlide(0);
+              drawable.current = false;
             }}
           >
             PLAYERS
@@ -303,6 +339,7 @@ const Game = () => {
               setZ(6);
               setOpacity(1);
               setChatSlide(0);
+              drawable.current = false;
             }}
           >
             CHATBOX

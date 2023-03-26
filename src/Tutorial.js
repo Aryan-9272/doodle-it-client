@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
@@ -9,19 +9,19 @@ import Canvas from "./Canvas";
 import { selectWord } from "./Library";
 import Header from "./Header";
 import Footer from "./Footer";
+import { CanvasContext } from "./App";
 
-const Tutorial = (props) => {
+const Tutorial = () => {
+  const contextVal = useContext(CanvasContext);
   const [tool, setTool] = useState("pen");
   const [word, setWord] = useState(selectWord());
 
   const findConfidence = (word) => {
-    let confidence;
-    props.result.forEach((element) => {
-      if (element.label.replaceAll("_", " ") == word) {
-        confidence = (element.confidence * 100).toFixed(2);
-      }
-    });
-    return confidence;
+    const confidence = contextVal.result.find((element) => {
+      return element.label.replaceAll("_", " ") == word;
+    }).confidence;
+
+    return (confidence * 100).toFixed(2);
   };
   return (
     <div
@@ -48,7 +48,12 @@ const Tutorial = (props) => {
           xl:text-[1.6rem] xl:px-3"
           >
             <div>{word.toUpperCase()}</div>
-            <div>{props.result == null ? 0.0 : findConfidence(word)}%</div>
+            <div>
+              {contextVal.result == null
+                ? (0).toFixed(2)
+                : findConfidence(word)}
+              %
+            </div>
           </div>
           <Canvas tool={tool} mode={"tutorial"} />
           <div className="w-full h-[2.7rem] border-t-[1px] border-white text-white text-[1.5rem] flex justify-between items-center px-1">

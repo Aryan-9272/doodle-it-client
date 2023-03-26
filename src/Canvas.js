@@ -57,6 +57,7 @@ export default (props) => {
       canvasWidth * density,
       canvasHeight * density
     );
+    props.imgRef.current = img.current.canvas.toDataURL();
   };
 
   const filterImage = (p5) => {
@@ -81,7 +82,12 @@ export default (props) => {
   };
 
   const draw = (p5) => {
-    if (props.tool == "submit" && submit.current == false) {
+    if (
+      props.mode == "board" &&
+      props.tool == "submit" &&
+      submit.current == false
+    ) {
+      filterImage(p5);
       saveImage(p5);
       p5.image(img.current, 0, 0, canvasWidth, canvasHeight);
       submit.current = true;
@@ -93,7 +99,8 @@ export default (props) => {
       p5.mouseX >= 0 &&
       p5.mouseX <= canvasWidth &&
       p5.mouseY >= 0 &&
-      p5.mouseY <= canvasHeight
+      p5.mouseY <= canvasHeight &&
+      (props.mode == "tutorial" || props.drawable.current)
     ) {
       p5.strokeWeight(strokeWeight);
       if (props.tool == "pen") p5.stroke(255, 255, 255);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./assets/doodle-it-logo-modified.png";
 import hLogo from "./assets/doodle-it-logo.png";
 import Home from "./Home";
@@ -16,12 +16,21 @@ function App() {
   const [page, setPage] = useState("home");
   const [canvas, setCanvas] = useState(null);
   const [result, setResult] = useState(null);
+  
+  useEffect(() => {
+    if (page != "tutorial") {
+      setResult(null);
+    }
+  }, [page]);
+
   return (
     <>
       <PageContext.Provider value={{ page, setPage }}>
-        <CanvasContext.Provider value={{ canvas, setCanvas }}>
+        <CanvasContext.Provider
+          value={{ canvas, setCanvas, result, setResult }}
+        >
           <Model setResult={setResult} />
-          {page === "tutorial" ? <Tutorial result={result} /> : <></>}
+          {page === "tutorial" ? <Tutorial /> : <></>}
           <SocketContext.Provider value={socket}>
             {page === "game" ? <Game /> : <></>}
           </SocketContext.Provider>

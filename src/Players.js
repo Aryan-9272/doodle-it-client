@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Players = (props) => {
-  const [playerDetails, setPlayerDetails] = useState(props.details);
+  const playerDetails = props.details;
   let role;
   if (playerDetails.isAdmin == true && playerDetails.playerid === props.id) {
     role = "YOU/AD";
@@ -20,7 +20,7 @@ const Players = (props) => {
     lg:w-[189px] lg:text-[0.7rem] lg:h-[3rem] lg:mt-1
     xl:w-[260px] xl:h-[4rem] xl:text-[1rem] xl:gap-x-1 xl:mt-2"
       style={
-        props.details.isReady == true
+        playerDetails.isReady == true
           ? { borderColor: "#4e0eff" }
           : { borderColor: "#ff0e66" }
       }
