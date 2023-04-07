@@ -32,6 +32,10 @@ body {
   border-radius: 0;
 }
 
+.scoreboard::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
 .scoreboard::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 2px;

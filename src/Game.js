@@ -235,9 +235,9 @@ const Game = () => {
             <></>
           )}
 
-          {gameComponent === "Report" ? <Report result={report}/> : <></>}
+          {gameComponent === "Report" ? <Report result={report} setComponent={setGameComponent}/> : <></>}
 
-          {gameComponent === "Results" ? <Results /> : <></>}
+          {gameComponent === "Results" ? <Results results={results} setComponent={setGameComponent} setReport={setReport}/> : <></>}
 
           <div
             className="w-[330px] h-[470px] justify-center items-center flex-col border-white border-[1px] self-end absolute right-2 z-10

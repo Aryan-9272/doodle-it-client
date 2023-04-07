@@ -1,5 +1,4 @@
 import React from "react";
-import pIcon from "./assets/avatars/_Group_ (1).png";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -117,6 +116,9 @@ const Report = (props) => {
         md:text-[2.3rem]
         lg:text-[1.9rem]
         xl:text-[2.2rem]"
+        onClick={() => {
+          props.setComponent("Results");
+        }}
       >
         CONTINUE
       </div>
