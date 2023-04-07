@@ -93,7 +93,7 @@ const Game = () => {
   useEffect(() => {
     window.addEventListener("resize", resized);
 
-    socket.on("player-joined", (details) => {
+    socket.on("room-update", (details) => {
       setRoomDetails(details);
       setGameTimer(details.timeLimit);
     });

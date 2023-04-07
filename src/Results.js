@@ -83,6 +83,9 @@ const Results = (props) => {
         md:text-[2.3rem]
         lg:text-[1.9rem]
         xl:text-[2.2rem]"
+          onClick={() => {
+            props.setComponent("Lobby");
+          }}
         >
           CONTINUE
         </div>

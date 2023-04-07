@@ -29,6 +29,7 @@ const Board = (props) => {
         confidence: drawResult,
         closestMatch: contextVal.result[0],
       });
+      contextVal.setResult(null);
     }
   }, [drawResult]);
 
