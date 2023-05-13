@@ -13,6 +13,7 @@ import Players from "./Players";
 import Chats from "./Chats";
 import Lobby from "./Lobby";
 import SocketContext from "./SocketContext";
+import Standings from "./Standings";
 
 const decideWidth = () => {
   let width;
@@ -42,6 +43,8 @@ const Game = () => {
   const [word, setWord] = useState("");
   const [results, setResults] = useState([]);
   const [report, setReport] = useState({});
+  const [playersInfo, setPlayersInfo] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
   const [opacity, setOpacity] = useState(0);
   const [z, setZ] = useState(4);
@@ -67,6 +70,7 @@ const Game = () => {
   };
 
   const playerUpdate = (players) => {
+    setPlayersInfo(players);
     setPlayerList(
       players.map((player, index) => {
         return <Players key={index} details={player} id={socket.id} />;
@@ -124,6 +128,10 @@ const Game = () => {
         });
       });
       setGameComponent("Report");
+    });
+
+    socket.on("finish-game", () => {
+      setGameOver(true);
     });
 
     return () => {
@@ -223,7 +231,17 @@ const Game = () => {
             </div>
           </div>
 
-          {gameComponent === "Lobby" ? <Lobby details={roomDetails} /> : <></>}
+          {gameComponent === "Lobby" && gameOver == false ? (
+            <Lobby details={roomDetails} />
+          ) : (
+            <></>
+          )}
+
+          {gameComponent === "Lobby" && gameOver == true ? (
+            <Standings players={playersInfo} />
+          ) : (
+            <></>
+          )}
 
           {gameComponent === "Board" ? (
             <Board
@@ -235,9 +253,21 @@ const Game = () => {
             <></>
           )}
 
-          {gameComponent === "Report" ? <Report result={report} setComponent={setGameComponent}/> : <></>}
+          {gameComponent === "Report" ? (
+            <Report result={report} setComponent={setGameComponent} />
+          ) : (
+            <></>
+          )}
 
-          {gameComponent === "Results" ? <Results results={results} setComponent={setGameComponent} setReport={setReport}/> : <></>}
+          {gameComponent === "Results" ? (
+            <Results
+              results={results}
+              setComponent={setGameComponent}
+              setReport={setReport}
+            />
+          ) : (
+            <></>
+          )}
 
           <div
             className="w-[330px] h-[470px] justify-center items-center flex-col border-white border-[1px] self-end absolute right-2 z-10
