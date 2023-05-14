@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PageContext } from "./App";
 
 const findStandings = (players) => {
   players.sort((a, b) => {
@@ -29,6 +30,7 @@ const findStandings = (players) => {
 };
 
 const Standings = (props) => {
+  const pageState = useContext(PageContext);
   return (
     <div
       className="border-white border-[1px] min-w-[372px] min-h-[470px] w-[372px] h-[470px] relative bg-gray-900/50 z-[5] flex justify-center items-center flex-col
@@ -61,6 +63,9 @@ const Standings = (props) => {
       md:text-[1.9rem]
       lg:text-[1.5rem]
       xl:text-[1.7rem]"
+        onClick={() => {
+          pageState.setPage("home");
+        }}
       >
         LEAVE ROOM
       </div>
