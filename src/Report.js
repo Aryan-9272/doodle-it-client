@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const Report = (props) => {
+  const [meterVal, setMeterVal] = useState(0);
+  setTimeout(() => {
+    setMeterVal((props.result.confidence * 100).toFixed(2));
+  }, 100);
   return (
     <div
       className="border-white border-[1px] min-w-[372px] min-h-[470px] w-[372px] h-[470px] relative grid bg-gray-900/50 z-[5] grid-rows-[10%_55%_20%] p-2 gap-2 grid-cols-[14%_48%]
@@ -61,7 +65,7 @@ const Report = (props) => {
           <h1>MATCH</h1>
           <div className="w-[80%]">
             <CircularProgressbar
-              value={(props.result.confidence * 100).toFixed(2)}
+              value={meterVal}
               text={`${(props.result.confidence * 100).toFixed(2)}%`}
               background
               backgroundPadding={2}
@@ -98,11 +102,11 @@ const Report = (props) => {
           CLOSEST MATCH
         </h1>
         <h1
-          className="text-[1.5rem] w-full h-[50%] bg-white  text-center flex justify-center items-center
+          className="text-[1.3rem] w-full h-[50%] bg-white  text-center flex justify-center items-center
         sm:text-[1.6rem]
-        md:text-[2.1rem]
-        lg:text-[1.7rem]
-        xl:text-[2rem]
+        md:text-[1.9rem]
+        lg:text-[1.5rem]
+        xl:text-[1.8rem]
         "
         >
           {props.result.closestMatch.label.replaceAll("_", " ").toUpperCase()} -{" "}
