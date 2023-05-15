@@ -19,7 +19,6 @@ function App() {
 
   useEffect(() => {
     socket.on("disconnect", () => {
-      setPage("error");
       setErrMsg({
         head: "CONNECTION LOST",
         body: [
@@ -27,6 +26,7 @@ function App() {
           "CONSIDER REFRESHING THE PAGE OR WAITING MOMENTARILY FOR RECONNECTION.",
         ],
       });
+      setPage("error");
       const interval = setInterval(() => {
         if (socket.connected) {
           clearInterval(interval);
@@ -37,6 +37,11 @@ function App() {
     });
 
     socket.on("room-not-found", (msg) => {
+      setErrMsg(msg);
+      setPage("error");
+    });
+
+    socket.on("room-full", (msg) => {
       setErrMsg(msg);
       setPage("error");
     });
