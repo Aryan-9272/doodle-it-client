@@ -238,7 +238,7 @@ const Game = () => {
           )}
 
           {gameComponent === "Lobby" && gameOver == true ? (
-            <Standings players={playersInfo} />
+            <Standings players={playersInfo} roomCode={roomDetails.roomCode}/>
           ) : (
             <></>
           )}

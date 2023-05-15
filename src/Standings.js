@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { PageContext } from "./App";
+import SocketContext from "./SocketContext";
 
 const findStandings = (players) => {
   players.sort((a, b) => {
@@ -31,6 +32,7 @@ const findStandings = (players) => {
 
 const Standings = (props) => {
   const pageState = useContext(PageContext);
+  const socket=useContext(SocketContext);
   return (
     <div
       className="border-white border-[1px] min-w-[372px] min-h-[470px] w-[372px] h-[470px] relative bg-gray-900/50 z-[5] flex justify-center items-center flex-col
@@ -65,6 +67,7 @@ const Standings = (props) => {
       xl:text-[1.7rem]"
         onClick={() => {
           pageState.setPage("home");
+          socket.emit("leave-room",props.roomCode);
         }}
       >
         LEAVE ROOM
