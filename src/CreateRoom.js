@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -32,6 +32,12 @@ const CreateRoom = () => {
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
   const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
+
+  useEffect(() => {
+    socket.on("room-created", () => {
+      pageState.setPage("game");
+    });
+  },[]);
 
   return (
     <>
@@ -176,7 +182,6 @@ const CreateRoom = () => {
                 rounds: rounds,
                 timeLimit: time,
               });
-              pageState.setPage("game");
             }
           }}
         >

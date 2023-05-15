@@ -24,15 +24,23 @@ function App() {
         head: "CONNECTION LOST",
         body: [
           "THIS HAPPENS DUE TO INACTIVITY OR CONNECTIVITY ISSUES.",
-          "TRY RELOADING THE PAGE OR VISITING THE HOME PAGE TO RECONNECT.",
+          "CONSIDER REFRESHING THE PAGE OR WAITING MOMENTARILY FOR RECONNECTION.",
         ],
       });
-      if (page === "home") socket.connect();
+      const interval = setInterval(() => {
+        if (socket.connected) {
+          clearInterval(interval);
+        } else {
+          socket.connect();
+        }
+      }, 3000);
     });
+
     socket.on("room-not-found", (msg) => {
       setErrMsg(msg);
       setPage("error");
     });
+
     socket.on("round-active", (msg) => {
       setErrMsg(msg);
       setPage("error");
@@ -42,6 +50,19 @@ function App() {
   useEffect(() => {
     if (page != "tutorial") {
       setResult(null);
+    }
+    if (
+      (page === "create" || page === "join" || page === "game") &&
+      socket.connected === false
+    ) {
+      setErrMsg({
+        head: "SERVER DOWN",
+        body: [
+          "THE CONNECTION TO THE SERVER COULD NOT BE ESTABLISHED MOMENTARILY.",
+          "CHECK NETWORK SETTINGS AND TRY CONNECTING AGAIN AFTER SOME TIME.",
+        ],
+      });
+      setPage("error");
     }
   }, [page]);
 
@@ -54,12 +75,12 @@ function App() {
           <Model setResult={setResult} />
           {page === "tutorial" ? <Tutorial /> : <></>}
           <SocketContext.Provider value={socket}>
-            {page === "game" ? <Game /> : <></>}
+            {page === "game" && socket.connected ? <Game /> : <></>}
           </SocketContext.Provider>
         </CanvasContext.Provider>
         <SocketContext.Provider value={socket}>
-          {page === "create" ? <CreateRoom /> : <></>}
-          {page === "join" ? <JoinRoom /> : <></>}
+          {page === "create" && socket.connected ? <CreateRoom /> : <></>}
+          {page === "join" && socket.connected ? <JoinRoom /> : <></>}
         </SocketContext.Provider>
         {page === "home" ? <Home /> : <></>}
         {page === "error" ? <ErrorPage errMsg={errMsg} /> : <></>}

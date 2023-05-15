@@ -31,7 +31,7 @@ const JoinRoom = () => {
     socket.on("room-found", () => {
       pageState.setPage("game");
     });
-  });
+  },[]);
 
   return (
     <>
