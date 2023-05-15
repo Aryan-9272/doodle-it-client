@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretLeft,
@@ -26,6 +26,13 @@ const JoinRoom = () => {
   const [seed, setSeed] = useState(avatarArray[index]);
   let svgCode = multiavatar(seed);
   const imgSrc = `data:image/svg+xml;base64,${btoa(svgCode)}`;
+
+  useEffect(() => {
+    socket.on("room-found", () => {
+      pageState.setPage("game");
+    });
+  });
+
   return (
     <>
       <div
@@ -117,7 +124,6 @@ const JoinRoom = () => {
                 avatar: imgSrc,
                 name: name.trim(),
               });
-              pageState.setPage("game");
             }
           }}
         >

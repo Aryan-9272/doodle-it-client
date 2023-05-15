@@ -15,14 +15,28 @@ function App() {
   const [page, setPage] = useState("home");
   const [canvas, setCanvas] = useState(null);
   const [result, setResult] = useState(null);
+  const [errMsg, setErrMsg] = useState(null);
 
   useEffect(() => {
     socket.on("disconnect", () => {
+      setPage("error");
+      setErrMsg({
+        head: "CONNECTION LOST",
+        body: [
+          "THIS HAPPENS DUE TO INACTIVITY OR CONNECTIVITY ISSUES.",
+          "TRY RELOADING THE PAGE OR VISITING THE HOME PAGE TO RECONNECT.",
+        ],
+      });
       if (page === "home") socket.connect();
     });
-    socket.on("room-not-found",()=>{
+    socket.on("room-not-found", (msg) => {
+      setErrMsg(msg);
       setPage("error");
-    })
+    });
+    socket.on("round-active", (msg) => {
+      setErrMsg(msg);
+      setPage("error");
+    });
   }, []);
 
   useEffect(() => {
@@ -48,7 +62,7 @@ function App() {
           {page === "join" ? <JoinRoom /> : <></>}
         </SocketContext.Provider>
         {page === "home" ? <Home /> : <></>}
-        {page === "error" ? <ErrorPage /> : <></>}
+        {page === "error" ? <ErrorPage errMsg={errMsg} /> : <></>}
       </PageContext.Provider>
     </>
   );
