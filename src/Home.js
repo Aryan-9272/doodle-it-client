@@ -3,6 +3,7 @@ import logo from "./assets/doodle-it-logo-modified.png";
 import Header from "./Header";
 import Footer from "./Footer";
 import { PageContext } from "./App";
+import Loader from "./Loader";
 
 function Home() {
   const pageState = useContext(PageContext);
@@ -62,6 +63,7 @@ function Home() {
         </div>
       </div>
       <Footer />
+      <Loader duration={2000} />
     </div>
   );
 }

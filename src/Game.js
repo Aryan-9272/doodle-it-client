@@ -14,6 +14,7 @@ import Chats from "./Chats";
 import Lobby from "./Lobby";
 import SocketContext from "./SocketContext";
 import Standings from "./Standings";
+import Loader from "./Loader";
 
 const decideWidth = () => {
   let width;
@@ -188,7 +189,10 @@ const Game = () => {
           >
             <FontAwesomeIcon icon={faHourglassHalf} size="sm" shake={false} />
             <h1 className="ml-3">
-              TIME {gameComponent === "Lobby" ? "LIMIT" : "LEFT"} : {gameTimer}s
+              TIME{" "}
+              {gameComponent === "Board"
+                ? `LEFT : ${gameTimer}s`
+                : `LIMIT : ${roomDetails.timeLimit}s`}
             </h1>
           </div>
         </div>
@@ -238,7 +242,7 @@ const Game = () => {
           )}
 
           {gameComponent === "Lobby" && gameOver == true ? (
-            <Standings players={playersInfo} roomCode={roomDetails.roomCode}/>
+            <Standings players={playersInfo} roomCode={roomDetails.roomCode} />
           ) : (
             <></>
           )}
@@ -375,6 +379,7 @@ const Game = () => {
             CHATBOX
           </div>
         </div>
+        <Loader duration={1000} />
       </div>
     </>
   );

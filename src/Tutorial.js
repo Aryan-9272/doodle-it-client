@@ -10,6 +10,7 @@ import { selectWord } from "./Library";
 import Header from "./Header";
 import Footer from "./Footer";
 import { CanvasContext } from "./App";
+import Loader from "./Loader";
 
 const Tutorial = () => {
   const contextVal = useContext(CanvasContext);
@@ -133,6 +134,7 @@ const Tutorial = () => {
         ></div>
       </div>
       <Footer />
+      <Loader duration={1000} />
     </div>
   );
 };
