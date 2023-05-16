@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { PageContext } from "./App";
 import Loader from "./Loader";
+import Preview from "./Preview";
 
 function Home() {
   const pageState = useContext(PageContext);
@@ -27,7 +28,9 @@ function Home() {
       md:w-[30rem] md:h-[30rem] 
       lg:w-[32rem] lg:h-[32rem] lg:order-1
       xl:w-[36rem] xl:h-[36rem]"
-        ></div>
+        >
+          <Preview />
+        </div>
         <div
           className="w-[24rem] h-[36rem] bg-gray-900/50 shadow-lg rounded-md  gap-5 flex justify-center items-center flex-col order-1 border-white border-[1px]
       sm:w-[27rem]

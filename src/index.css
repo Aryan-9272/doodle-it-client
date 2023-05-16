@@ -45,3 +45,12 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
+
+@keyframes fade-anim {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
