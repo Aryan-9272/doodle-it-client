@@ -7,6 +7,7 @@ import Tutorial from "./Tutorial";
 import Model from "./Model";
 import SocketContext, { socket } from "./SocketContext";
 import ErrorPage from "./ErrorPage";
+import About from "./About";
 
 export const CanvasContext = React.createContext();
 export const PageContext = React.createContext();
@@ -89,6 +90,7 @@ function App() {
         </SocketContext.Provider>
         {page === "home" ? <Home /> : <></>}
         {page === "error" ? <ErrorPage errMsg={errMsg} /> : <></>}
+        {page === "about" ? <About /> : <></>}
       </PageContext.Provider>
     </>
   );
