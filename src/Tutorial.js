@@ -11,7 +11,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { CanvasContext } from "./App";
 import Loader from "./Loader";
-import TutorialDesc from "./TutorialDesc";
+import Guide from "./Guide";
 
 const Tutorial = () => {
   const contextVal = useContext(CanvasContext);
@@ -139,7 +139,7 @@ const Tutorial = () => {
           >
             GUIDE
           </div>
-          <TutorialDesc />
+          <Guide />
         </div>
       </div>
       <Footer />

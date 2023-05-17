@@ -1,6 +1,6 @@
 import React from "react";
 
-const TutorialDesc = () => {
+const Guide = () => {
   return (
     <div
       className="h-full w-full flex flex-col justify-around items-center text-slate-100 text-sm px-3 p-1
@@ -49,4 +49,4 @@ const TutorialDesc = () => {
   );
 };
 
-export default TutorialDesc;
+export default Guide;
