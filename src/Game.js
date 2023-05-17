@@ -379,7 +379,7 @@ const Game = () => {
             CHATBOX
           </div>
         </div>
-        <Loader duration={1000} />
+        <Loader duration={1500} />
       </div>
     </>
   );
