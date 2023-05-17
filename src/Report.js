@@ -50,7 +50,7 @@ const Report = (props) => {
         <div className="w-full h-[90%] border-white border-t-[1px]">
           <img
             src={props.result.drawing}
-            className="w-full h-full object-cover"
+            className="w-full h-full"
           />
         </div>
       </div>

@@ -11,6 +11,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { CanvasContext } from "./App";
 import Loader from "./Loader";
+import TutorialDesc from "./TutorialDesc";
 
 const Tutorial = () => {
   const contextVal = useContext(CanvasContext);
@@ -126,12 +127,20 @@ const Tutorial = () => {
           </div>
         </div>
         <div
-          className="w-[23rem] h-[30rem] shadow-lg gap-5 flex justify-center items-center flex-col order-1 border-white border-[1px]
+          className="w-[23rem] h-[30rem] shadow-lg flex justify-center items-center flex-col order-1 border-white border-[1px]
       sm:w-[29.2rem] sm:h-[33rem]
       md:w-[34.2rem] md:h-[36rem]
       lg:w-[28rem] lg:h-[30rem] lg:order-2
       xl:w-[32rem] xl:h-[36rem]"
-        ></div>
+        >
+          <div
+            className="w-full text-white text-xl border-b-[1px] flex justify-center items-center p-1
+          xl:text-2xl"
+          >
+            GUIDE
+          </div>
+          <TutorialDesc />
+        </div>
       </div>
       <Footer />
       <Loader duration={1000} />
