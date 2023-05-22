@@ -4,7 +4,7 @@ import Game from "./Pages/Game";
 import CreateRoom from "./Pages/CreateRoom";
 import JoinRoom from "./Pages/JoinRoom";
 import Tutorial from "./Pages/Tutorial";
-import Model from "./Utilities/Model";
+import Model from "./DoodleNet/Model";
 import SocketContext, { socket } from "./Contexts/SocketContext";
 import ErrorPage from "./Pages/ErrorPage";
 import About from "./Pages/About";

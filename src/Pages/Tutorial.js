@@ -5,8 +5,8 @@ import {
   faEraser,
   faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import Canvas from "../Utilities/Canvas";
-import { selectWord } from "../Utilities/Library";
+import Canvas from "../DoodleNet/Canvas";
+import { selectWord } from "../DoodleNet/library.js";
 import Header from "../Components/Common/Header";
 import Footer from "../Components/Common/Footer";
 import { CanvasContext } from "../App";

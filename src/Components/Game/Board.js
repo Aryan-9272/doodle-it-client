@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Canvas from "../../Utilities/Canvas";
+import Canvas from "../../DoodleNet/Canvas";
 import {
   faPen,
   faEraser,
