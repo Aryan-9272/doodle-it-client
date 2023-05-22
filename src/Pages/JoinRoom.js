@@ -5,11 +5,11 @@ import {
   faCaretRight,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
 import multiavatar from "@multiavatar/multiavatar/esm";
-import { PageContext } from "./App";
-import SocketContext from "./SocketContext";
+import { PageContext } from "../App";
+import SocketContext from "../Contexts/SocketContext";
 
 let avatarArray = [];
 let index = 0;

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import logo from "./assets/doodle-it-logo-modified.png";
-import Header from "./Header";
-import Footer from "./Footer";
-import { PageContext } from "./App";
-import Loader from "./Loader";
-import Preview from "./Preview";
+import logo from "../assets/doodle-it-logo-modified.png";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
+import { PageContext } from "../App";
+import Loader from "../Components/Common/Loader";
+import Preview from "../Components/Home/Preview";
 
 function Home() {
   const pageState = useContext(PageContext);

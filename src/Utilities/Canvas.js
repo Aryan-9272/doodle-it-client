@@ -1,6 +1,6 @@
 import React, { useRef, useContext } from "react";
 import Sketch from "react-p5";
-import { CanvasContext } from "./App";
+import { CanvasContext } from "../App";
 
 let canvasWidth;
 let canvasHeight;

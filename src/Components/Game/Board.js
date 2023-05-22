@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Canvas from "./Canvas";
+import Canvas from "../../Utilities/Canvas";
 import {
   faPen,
   faEraser,
   faRotateLeft,
   faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { CanvasContext } from "./App";
-import SocketContext from "./SocketContext";
+import { CanvasContext } from "../../App";
+import SocketContext from "../../Contexts/SocketContext";
 
 const Board = (props) => {
   const contextVal = useContext(CanvasContext);

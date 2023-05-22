@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import hLogo from "./assets/doodle-it-logo.png";
+import hLogo from "../../assets/doodle-it-logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { PageContext } from "./App";
+import { PageContext } from "../../App";
 import HamMenu from "./HamMenu";
 
 const Header = () => {

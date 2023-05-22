@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import practice from "./assets/practice.png";
-import score from "./assets/score.png";
-import result from "./assets/result.png";
-import chat from "./assets/chats.png";
-import room from "./assets/room.png";
-import device from "./assets/device.png";
+import practice from "../../assets/practice.png";
+import score from "../../assets/score.png";
+import result from "../../assets/result.png";
+import chat from "../../assets/chats.png";
+import room from "../../assets/room.png";
+import device from "../../assets/device.png";
 import PrevImg from "./PrevImg";
 
 const desc = [

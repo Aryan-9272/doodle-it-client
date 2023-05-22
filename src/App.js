@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Home";
-import Game from "./Game";
-import CreateRoom from "./CreateRoom";
-import JoinRoom from "./JoinRoom";
-import Tutorial from "./Tutorial";
-import Model from "./Model";
-import SocketContext, { socket } from "./SocketContext";
-import ErrorPage from "./ErrorPage";
-import About from "./About";
+import Home from "./Pages/Home";
+import Game from "./Pages/Game";
+import CreateRoom from "./Pages/CreateRoom";
+import JoinRoom from "./Pages/JoinRoom";
+import Tutorial from "./Pages/Tutorial";
+import Model from "./Utilities/Model";
+import SocketContext, { socket } from "./Contexts/SocketContext";
+import ErrorPage from "./Pages/ErrorPage";
+import About from "./Pages/About";
 
 export const CanvasContext = React.createContext();
 export const PageContext = React.createContext();

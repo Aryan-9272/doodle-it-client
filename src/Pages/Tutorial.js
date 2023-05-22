@@ -5,13 +5,13 @@ import {
   faEraser,
   faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import Canvas from "./Canvas";
-import { selectWord } from "./Library";
-import Header from "./Header";
-import Footer from "./Footer";
-import { CanvasContext } from "./App";
-import Loader from "./Loader";
-import Guide from "./Guide";
+import Canvas from "../Utilities/Canvas";
+import { selectWord } from "../Utilities/Library";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
+import { CanvasContext } from "../App";
+import Loader from "../Components/Common/Loader";
+import Guide from "../Components/Tutorial/Guide";
 
 const Tutorial = () => {
   const contextVal = useContext(CanvasContext);

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { PageContext } from "./App";
-import SocketContext from "./SocketContext";
+import { PageContext } from "../../App";
+import SocketContext from "../../Contexts/SocketContext";
 
 const findStandings = (players) => {
   players.sort((a, b) => {

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import SocketContext from "./SocketContext";
+import SocketContext from "../../Contexts/SocketContext";
 
 const Lobby = (props) => {
   const socket = useContext(SocketContext);

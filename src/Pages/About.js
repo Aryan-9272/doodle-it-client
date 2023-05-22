@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Loader from "./Loader";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
+import Loader from "../Components/Common/Loader";
 
 const About = () => {
   return (

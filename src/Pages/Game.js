@@ -5,16 +5,16 @@ import {
   faPenToSquare,
   faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
-import hLogo from "./assets/doodle-it-logo.png";
-import Report from "./Report";
-import Results from "./Results";
-import Board from "./Board";
-import Players from "./Players";
-import Chats from "./Chats";
-import Lobby from "./Lobby";
-import SocketContext from "./SocketContext";
-import Standings from "./Standings";
-import Loader from "./Loader";
+import hLogo from "../assets/doodle-it-logo.png";
+import Report from "../Components/Game/Report";
+import Results from "../Components/Game/Results";
+import Board from "../Components/Game/Board";
+import Players from "../Components/Game/Players";
+import Chats from "../Components/Game/Chats";
+import Lobby from "../Components/Game/Lobby";
+import SocketContext from "../Contexts/SocketContext";
+import Standings from "../Components/Game/Standings";
+import Loader from "../Components/Common/Loader";
 
 const decideWidth = () => {
   let width;
