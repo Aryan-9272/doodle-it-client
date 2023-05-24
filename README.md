@@ -1,70 +1,35 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DOODLE-IT
 
-## Available Scripts
+DOODLE-IT is an engaging online game that allows players to unleash their creativity and competitive spirit through doodling challenges. Whether you're a seasoned artist or just starting your artistic journey, DOODLE-IT provides a fun and inclusive platform for players to connect, compete, and showcase their doodling skills.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Create Room: With DOODLE-IT, you have the option to create your own room. Creating a room allows you to set up a doodling challenge and invite other players to join. Be the host of your own doodling adventure and let your imagination run wild.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Join Room: Joining a room in DOODLE-IT is as easy as a few clicks. Explore existing rooms created by other players and join in on the doodling fun. Compete against other players, engage in friendly competitions and discover a world of diverse doodles.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Compete: Draw your interpretation of the given word and let the advanced DoodleNet model assign scores to your creation. Climb up the leaderboard, showcase your artistic prowess, and strive to be the ultimate doodling champion.
 
-### `npm test`
+- Chat: Engage in lively conversations with other players in your room. The chat feature enhances the social aspect of the game, creating a vibrant and interactive community of doodlers.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Practice: Practice makes perfect! In DOODLE-IT, you have the opportunity to sharpen your doodling skills in a dedicated practice mode. Here, you can experiment with different techniques, try out new ideas, and enhance your artistic abilities without the pressure of competition.
 
-### `npm run build`
+- Cross-Platform: DOODLE-IT is designed with cross-platform compatibility in mind. You can enjoy the game seamlessly across various devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Client:** React, TailwindCSS, p5.js, ml5.js
 
-### `npm run eject`
+**Server:** Node, Express, Socket.io
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Screenshots
+![Gameplay](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/0516e9cf-0c61-497f-924c-78c152cb4f34)
+[Practice](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/970bd08d-7b23-4492-8bc0-7213f07308c5)
+![Result](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/3cda70ed-909b-4345-a36a-a2687dd2ed47)
+![Device](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/a0f79cae-ca0e-4a05-8e31-8bf88b31fe62)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
