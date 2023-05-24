@@ -17,19 +17,31 @@ DOODLE-IT is an engaging online game that allows players to unleash their creati
 
 - Cross-Platform: DOODLE-IT is designed with cross-platform compatibility in mind. You can enjoy the game seamlessly across various devices.
 
+## Screenshots
+### Lobby
+![Gameplay](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/f1267468-1798-4a89-b66f-c457ecfa8831)
+
+### Report
+![Report](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/df649fec-fd4e-4161-8d6a-d388f843b4d4)
+
+### Practice
+![Practice](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/498b636f-aba8-4882-a8a3-97cc1877dac3)
+
+### Responsive
+![Responsive](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/3351996e-6ffa-4aef-9561-38f804edf630)
+
+
+
 
 ## Tech Stack
 
-**Client:** React, TailwindCSS, p5.js, ml5.js
+- **Client:** React, TailwindCSS, p5.js, ml5.js
 
-**Server:** Node, Express, Socket.io
-
-
-## Screenshots
-![Gameplay](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/0516e9cf-0c61-497f-924c-78c152cb4f34)
-[Practice](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/970bd08d-7b23-4492-8bc0-7213f07308c5)
-![Result](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/3cda70ed-909b-4345-a36a-a2687dd2ed47)
-![Device](https://github.com/Aryan-9272/doodle-it-client/assets/77203007/a0f79cae-ca0e-4a05-8e31-8bf88b31fe62)
+- **Server:** Node, Express, Socket.io
 
 
+## Contribute
+Contributions to DOODLE-IT are welcome! If you have any suggestions, bug fixes, or feature enhancements, feel free to submit a pull request. Together, we can make DOODLE-IT even more exciting and enjoyable for all players.
 
+## License
+DOODLE-IT is released under the MIT License. Feel free to modify and distribute the game as per the terms of the license.
