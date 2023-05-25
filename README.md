@@ -42,6 +42,3 @@ DOODLE-IT is an engaging online game that allows players to unleash their creati
 
 ## Contribute
 Contributions to DOODLE-IT are welcome! If you have any suggestions, bug fixes, or feature enhancements, feel free to submit a pull request. Together, we can make DOODLE-IT even more exciting and enjoyable for all players.
-
-## License
-DOODLE-IT is released under the MIT License. Feel free to modify and distribute the game as per the terms of the license.
